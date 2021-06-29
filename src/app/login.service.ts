@@ -7,10 +7,11 @@ export class LoginService {
 
   constructor(private http :HttpClient) { }
 
-  url ="https://jsonplaceholder.typicode.com/posts"
+  url ="http://localhost:3000/users"
 
-  getList(){
-    return this.http.get(this.url);
+  
+  LoginUser(){
+    return this.http.get(this.url)
   }
 
 

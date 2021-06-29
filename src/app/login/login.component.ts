@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import {LoginService} from '../login.service'
 @Component({
   selector: 'app-login',
@@ -8,29 +9,42 @@ import {LoginService} from '../login.service'
 })
 export class LoginComponent implements OnInit {
 
-  collection:any=[];
+  
 
-  constructor(private service:LoginService) { 
+  constructor(private service:LoginService  , private router: Router) { 
 
-    this.service.getList().subscribe(
-      (result)=>{
-        console.log(result)
-      }
-    )
   }
 
   ngOnInit(): void {
   }
 
-  loginForm = new FormGroup({
-    username:new FormControl(''),
-    password :new FormControl('')
+
+  Login = new FormGroup({
+    name:new FormControl(),
+    password:new FormControl()
   })
-
-  collectData(){
-    console.log(this.loginForm.value);
+  alert:Boolean=false
+  LoginData(){
+    this.service.LoginUser().subscribe((result:any)=>{
+      
+      
+     
+      for(let logd in result){
+        
+        if (this.Login.value.name==result[logd].name && this.Login.value.password==result[logd].password) {
+          
+          this.router.navigate(['/welcome']);
+  
+        }
+      }
+      this.alert=true
+      this.Login.reset()
+      
+    })
+    
+   
+    
   }
-
 
   
 
