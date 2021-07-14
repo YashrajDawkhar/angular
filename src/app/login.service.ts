@@ -7,7 +7,8 @@ export class LoginService {
 
   constructor(private http :HttpClient) { }
 
-  url ="http://localhost:3000/users"
+  // url ="http://localhost:3000/users"
+  url ="/api"
 
   
   LoginUser(){
